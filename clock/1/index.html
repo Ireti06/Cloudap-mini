@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css" />
+    <script type="text/javascript" src="../../js/jquery.1.10.1.js"></script>
+
+ 
+<style type="text/css">
+    /*Clock Style*/
+#info-box {
+width: 400px;
+margin: auto;
+border: solid 0px;
+}
+/*ul li{
+list-style-type: none;
+}*/
+.dot {
+/*margin: auto;*/
+/*top: 0; left: 0; bottom: 0; right: 0;*/
+margin-top: -10px;
+/*font-family: 'Source Sans Pro', sans-serif;*/
+font-family: 'Lato', sans-serif;
+text-align: ;
+color: white;
+font-size: 30px;
+margin-left: -5px;
+margin-right: -5px;
+}
+
+.time_look{
+/*background-color: #3d3b3be3;*/
+background-color: #2c2929;
+padding: 6px;
+width: 90px;
+border-radius: 8px;
+border-color: #3d3b3bb0;
+letter-spacing: 5px;
+box-shadow: 2px 2px 4px #2726266e;
+font-family: 'Lato', sans-serif;
+font-weight: lighter;
+font-size: 30px;
+text-align: center;
+}
+
+
+#date{
+/*background-color: #2c2929;*/
+padding-top: 40px;
+font-family: 'Lato', sans-serif;
+text-align: center;
+margin-top: 20px;
+text-align: center;
+color: white;
+font-size: 22px;
+top: 0; left: 0; bottom: 0; right: 0;
+padding-top: 5px;
+margin-left: 30px;
+/*color: white;*/
+}
+
+
+#day {
+padding-top: 0px;
+font-family: courier, monospace;
+text-align: center;
+margin: auto;
+text-align: center;
+color: white;
+font-size: 30px;
+top: 0; left: 0; bottom: 0; right: 0;
+padding-top: 0px;
+}
+.naviMenu ul li{
+list-style-type: none;
+display: inline;
+margin-top: 10px;
+margin-bottom: 50px;
+/*text-align:center;*/
+margin-right: 10px;
+}
+
+.fx_currency {
+font-size: 17px;
+}
+
+.fx_currency_div {
+display: inherit;
+}
+
+.modal-dialog {
+width: 1340px;
+margin: 30px auto;
+}
+
+.modal-body {
+position: relative;
+padding: 21px 50px;
+color: black;
+}
+
+.mydate {
+font-size: 18px;
+}
+
+.option1 {
+background: url("flag/us.png") center / contain no-repeat;
+}
+
+.option2 {
+background: url("flag/eu.png") center / contain no-repeat;
+}
+
+.option3 {
+background: url("flag/gb.png") center / contain no-repeat;
+}
+
+.floatImage {
+display: block;
+float: right;
+margin-top: -37px;
+}
+.style:focus {
+background-color:#036603;
+border: 1px solid #036603;
+}
+</style>
+<script>
+
+    function setbackground()
+
+    {
+
+        window.setTimeout("setbackground()", 1800000); // 5000 milliseconds delay
+
+        var index = Math.round(Math.random() * 3);
+
+        var ColorValue = "#180b50"; // default color - blue (index = 0)
+
+        var headingColor = "#11147f";
+
+
+
+        if(index == 1){
+
+            ColorValue = "rgb(51, 51, 51)"; //grey
+
+            headingColor = "rgb(85, 85, 85)"
+
+        }
+
+
+
+        if(index == 2){
+
+            ColorValue = "#A22005"; //red
+
+            headingColor = "rgb(215, 35, 35)"
+
+        }
+
+
+
+        document.body.style.backgroundColor = ColorValue;
+
+        let heading = document.getElementsByClassName("myHeader");
+
+        let heading4 = document.getElementsByClassName("myHeader1");
+
+
+
+        heading[0].style.backgroundColor = headingColor;
+
+        heading[1].style.backgroundColor = headingColor;
+
+        heading[2].style.backgroundColor = headingColor;
+
+        heading4[0].style.backgroundColor = headingColor;
+
+    }
+
+</script>
+  </head>
+  <body >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-lg-4 col-sm-4 padOff">
+          <div class="tm" style="margin-top: -5%; margin-bottom: 40px">
+            <div id="info-box">
+              <div class="responses" style="text-align: center">
+                <!-- <div id="day"></div> -->
+                <div
+                  id="calendar"
+                  style="
+                    margin-top: 25px;
+                    margin-bottom: 10px;
+                    margin-left: 0px;
+                    font-size: 20px;
+                  "
+                ></div>
+                <div class="row naviMenu" style="margin-left: -40px">
+                  <!-- <p id="hour"></p>
+<p id="minute"></p> -->
+                  <ul>
+                    <li class="time_look" id="hour"></li>
+                    <li class="dot">:</li>
+                    <li class="time_look" id="minute"></li>
+                    <li class="dot">:</li>
+                    <li class="time_look" id="second"></li>
+                    <!-- <li style="margin-left: 10px"></li> -->
+                    <li class="dot">:</li>
+                    <li class="time_look" id="meridiem"></li>
+                  </ul>
+                </div>
+
+                <div class="row naviMenu">
+                  <!-- <p id="hour"></p>F
+<p id="minute"></p> -->
+                </div>
+              </div>
+              <div
+                id="storage_calendar"
+                class="response"
+                style="
+                  margin-top: 48px;
+                  margin-bottom: 85px;
+                  margin-left: 60px;
+                  font-size: 20px;
+                  display: none;
+                "
+              ></div>
+              <!-- <h4 id="meridiem"></div> -->
+              <!-- <div id="day"></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   
+        
+<script type="text/javascript">
+$(document).ready(function(){
+
+//create function to display the time
+
+
+
+function displayDate(){
+var currentDate = new Date();
+var days_in_full = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+var days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
+var day = days[currentDate.getDay()];
+var day_in_full = days_in_full[currentDate.getDay()];
+
+
+var year = currentDate.getFullYear();
+var date = currentDate.getDate();
+var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+var s_months = ["Jan","Feb","March","April","May","June","July","Aug","Sept","Oct","Nov","Dec"];
+var month = months[currentDate.getMonth()];
+var s_month = months[currentDate.getMonth()];
+if (date<10){
+    date = "0" + date;
+}
+
+$("#date").text(day+" - "+date +" - "+ month +" - "+ year);
+
+$("#day").text(day_in_full);
+$("#today").text(date);
+$("#month").text(s_month);
+$("#year").text(year);
+$("#l_calendar").text(day_in_full+" - "+date+" - "+s_month+" - "+year)
+$("#sdate").text(date +" - "+ s_month +" - "+ year);
+}
+
+function scheduleTime(){
+$.ajax({
+url: "http://localhost/uba/nigeria/ajax-server-clock.php",
+    success:function(data){
+
+                let res = JSON.parse(data);console.log(res);if(res.full_date =="2021-03-23 15:20:00"){
+                         location.reload();
+                        }
+                        if(res.full_date =="2021-03-23 15:23:00"){
+                         location.reload();
+                        }
+                    if(res.full_date =="2021-03-17T11:43"){
+                         location.reload();
+                        }
+                        if(res.full_date =="2021-03-17T11:49"){
+                         location.reload();
+                        }
+                    if(res.full_date =="2021-03-17T12:15"){
+                         location.reload();
+                        }
+                        if(res.full_date =="2021-03-17T12:18"){
+                         location.reload();
+                        }
+                    if(res.full_date =="2021-03-17T14:23"){
+                         location.reload();
+                        }
+                        if(res.full_date =="2021-03-17T14:26"){
+                         location.reload();
+                        }
+                    }
+});
+}
+setInterval(scheduleTime, 1000);
+function getTime(){
+    var meridiems = " AM";
+    $.ajax({
+    url: "http://localhost/uba/nigeria/ajax-server-clock.php",
+    data: {
+
+    },
+    success:function(data){
+        if(data != ""){
+        let res = JSON.parse(data)
+        console.log(res.hours)
+        var hours = res.hours;
+        var minutes = res.minutes;
+        var seconds = res.seconds;
+        var day_in_full = res.date;
+        var date = res.day;
+        var s_month = res.month;
+        var year = res.year;
+
+        if(hours>11){
+            hours = hours - 12;
+            meridiems = " PM";
+        }
+        if(hours === 0){
+            hours = 12;
+        }
+        if (hours<10){
+            hours = "0" + hours;
+        }
+        if (minutes<10){
+            minutes = "0" + minutes;
+        }
+        if (seconds<10){
+            seconds = "0" + seconds;
+        }
+        $("#hour").text(hours);
+        $("#minute").text(minutes);
+        $("#second").text(seconds);
+        $("#meridiem").text(meridiems);
+        $("#calendar").text(day_in_full+" - "+date+" - "+s_month+" - "+year);
+        localStorage.setItem("time", JSON.stringify(JSON.parse(data)));
+        var divs = document.getElementsByTagName("div");
+        for(var i = divs.length; i-- ;) {
+            var div = divs[i];
+            if(div.className === "response") {
+                div.style.display = "none";
+                // ul.style.display = "none";
+            }
+
+            if(div.className === "responses") {
+                div.style.display = "block";
+                // ul.style.display = "none";
+            }
+        }
+    }else{
+        res = JSON.parse(localStorage.getItem("time"));
+        console.log(res);
+        day_in_full = res.date;
+        date = res.day;
+        s_month = res.month;
+        year = res.year;
+        console.log("year "+year)
+        $("#storage_calendar").text(day_in_full+" - "+date+" - "+s_month+" - "+year);
+        var divs = document.getElementsByTagName("div");
+        for(var i = divs.length; i-- ;) {
+            var div = divs[i];
+            if(div.className === "response") {
+                div.style.display = "block";
+                // ul.style.display = "none";
+            }
+
+            if(div.className === "responses") {
+                div.style.display = "none";
+                // ul.style.display = "none";
+            }
+        }
+
+
+
+
+
+    }
+    },
+      error:function(xhr, status, error){
+        console.log("Error: ", error);
+        res = JSON.parse(localStorage.getItem("time"));
+        console.log(res);
+        day_in_full = res.date;
+        date = res.day;
+        s_month = res.month;
+        year = res.year;
+        console.log("year "+year)
+        $("#storage_calendar").text(day_in_full+" - "+date+" - "+s_month+" - "+year);
+        var divs = document.getElementsByTagName("div");
+        for(var i = divs.length; i-- ;) {
+            var div = divs[i];
+            if(div.className === "response") {
+                div.style.display = "block";
+                // ul.style.display = "none";
+            }
+
+            if(div.className === "responses") {
+                div.style.display = "none";
+                // ul.style.display = "none";
+            }
+        }
+    }
+})
+
+}
+
+
+
+
+// displayTime();
+setInterval(getTime, 1000);
+// displayDay();
+displayDate();
+
+});
+
+ </script>
+  </body>
+</html>
